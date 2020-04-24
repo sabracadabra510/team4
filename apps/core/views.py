@@ -40,9 +40,11 @@ def donation_request_create(request):
             DonationRequest.objects.create(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
+                cover_url=form.cleaned_data['description'],
+                quantity=form.cleaned_data['description'],
                 #creator_user=logged_in_user,
             )
-            return redirect('/')
+            return redirect('/request/')
     else:
         # if a GET  we'll create a blank form
         form = AddDonationRequestForm()
