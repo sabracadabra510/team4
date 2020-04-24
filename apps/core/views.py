@@ -6,7 +6,7 @@ from django import forms
 class AddDonationRequestForm(forms.Form):
     title = forms.CharField()
     description = forms.CharField(widget=forms.Textarea)
-    cover_url = forms.URLField(max_length=127)
+   # cover_url = forms.URLField(max_length=127)
     quantity = forms.CharField(max_length=3)
 
 # Two example views. Change or delete as necessary.
@@ -40,7 +40,7 @@ def donation_request_create(request):
             DonationRequest.objects.create(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
-                cover_url=form.cleaned_data['description'],
+              #  cover_url=form.cleaned_data['description'],
                 quantity=form.cleaned_data['description'],
                 #creator_user=logged_in_user,
             )
