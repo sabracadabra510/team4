@@ -15,3 +15,8 @@ def about(request):
 
     return render(request, 'pages/about.html', context)
 
+def about(request):
+    context = {
+    }
+
+    return render(request, 'pages/request.html', context)
