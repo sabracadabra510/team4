@@ -52,3 +52,31 @@ def donation_request_create(request):
         'form': form,
     }
     return render(request, 'pages/request.html', context)
+
+def email_send(request):
+    return render(request, 'send_email.html')
+
+
+def send_email(request):
+    
+    name = request.POST.get('name', False),
+    email = request.POST.get('email', False),
+    message_text = request.POST.get('message', False),
+    print(message_text)
+    phone_number = request.POST.get('phone_number', False),
+    print(phone_number)
+    message = "phone number : " + phone_number[0] + "text:" + message_text[0]
+
+    try:
+        requests.post(
+		"https://api.mailgun.net/v3/sandboxe11fc3e25d97421aa9ae24a95cd2fdc6.mailgun.org/messages",
+		auth=("api", api_key),
+		data={"from": "Excited User <mailgun@sandboxe11fc3e25d97421aa9ae24a95cd2fdc6.mailgun.org>",
+			"to": [email],
+			"subject": name,
+			"text": message})
+        return redirect('home')
+    except:
+        print('hi')
+
+    return redirect("email_send")
