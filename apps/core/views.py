@@ -31,6 +31,7 @@ def about(request):
 #     return render(request, 'pages/request.html', context)
 
 def donation_request_create(request):
+    donation_requests = DonationRequest.objects.all()
     if request.method == 'POST':
         form = AddDonationRequestForm(request.POST)
         if form.is_valid():
@@ -41,7 +42,7 @@ def donation_request_create(request):
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
               #  cover_url=form.cleaned_data['description'],
-                quantity=form.cleaned_data['description'],
+                quantity=form.cleaned_data['quantity'],
                 #creator_user=logged_in_user,
             )
             return redirect('/request/')
@@ -49,6 +50,7 @@ def donation_request_create(request):
         # if a GET  we'll create a blank form
         form = AddDonationRequestForm()
     context = {
+        'donation_requests': donation_requests,
         'form': form,
     }
     return render(request, 'pages/request.html', context)
