@@ -7,3 +7,10 @@ class DonationRequest(models.Model):
     description = models.TextField()
     cover_url = models.URLField(max_length=127)
     quantity = models.CharField(max_length=3)
+    destination = models.CharField(max_length= 50)
+
+class Donors(models.Model):
+    name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    email = models.EmailField(max_length=20)
+

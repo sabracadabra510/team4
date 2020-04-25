@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from apps.core.models import DonationRequest
 from django import forms
+import requests
+import os
+os.environ['MAILGUN_API_KEY'] = '40f84bf16437f27c107717bf55c5d184-f135b0f1-eb8810fd'
+api_key= os.environ['MAILGUN_API_KEY']
+
 
 class AddDonationRequestForm(forms.Form):
     title = forms.CharField()
@@ -63,9 +68,9 @@ def send_email(request):
     email = request.POST.get('email', False),
     message_text = request.POST.get('message', False),
     print(message_text)
-    phone_number = request.POST.get('phone_number', False),
-    print(phone_number)
-    message = "phone number : " + phone_number[0] + "text:" + message_text[0]
+    # phone_number = request.POST.get('phone_number', False),
+    # print(phone_number)
+    # message = "phone number : " + phone_number[0] + "text:" + message_text[0]
 
     try:
         requests.post(
@@ -74,9 +79,9 @@ def send_email(request):
 		data={"from": "Excited User <mailgun@sandboxe11fc3e25d97421aa9ae24a95cd2fdc6.mailgun.org>",
 			"to": [email],
 			"subject": name,
-			"text": message})
-        return redirect('home')
+			"text": message_text})
+        return render(request, "send_email.html")
     except:
         print('hi')
 
-    return redirect("email_send")
+        return render(request, "send_email.html")

@@ -5,11 +5,12 @@
 
 
 <form action="send_email" method="POST">
-        {% crsf_token %}
+      
     <input name="name" placeholder="Name" />
     <input name="email" type="email" placeholder="Email" />
-    <textarea name="message">
+    <textarea name="message">        
     </textarea>
+    <input type="hidden" id="_post_token" name="csrfmiddlewaretoken"value="{{ csrf_token }}">
     <button type="submit">Submit</button>
     </form>
 
