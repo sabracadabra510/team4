@@ -36,6 +36,17 @@
     <p><strong>Quantity:</strong> {{ donation_request.quantity }}</p>
     <p><strong>Details:</strong> {{ donation_request.description }}</p>
     <p>(id #: {{ donation_request.id }})</p>
+
+<!-- This shows the creation date of the list, along with the avatar
+and username of the creator -->
+<div>
+on {{ donation_request.created|date:"F jS Y" }} by
+<a class="btn btn-link" href="/account/users/{{ rl.creator_user.username }}/" >
+    {{ donation_request.creator_user }}
+    <img src="{{ donation_request.creator_user.gravatar }}" class="navbar-avatar" />
+</a>
+</div>
+
 {% endfor %}
 {% endblock content %}
 
