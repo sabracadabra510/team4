@@ -49,7 +49,7 @@ def logout_view(request):
     messages.success(request, 'Logged out.')
     return redirect('home')
 
-
+@login_required
 def view_all_users(request):
     all_users = User.objects.all()
     context = {
@@ -57,7 +57,7 @@ def view_all_users(request):
     }
     return render(request, 'accounts/view_all_users.html', context)
 
-
+@login_required
 def view_profile(request, username):
     user = User.objects.get(username=username)
 
