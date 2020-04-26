@@ -64,3 +64,14 @@ def donation_request_create(request):
         'form': form,
     }
     return render(request, 'pages/request.html', context)
+
+@login_required
+def donation_request_delete(request, drequest_id):
+    # D in CRUD --- DELETE reading list from database
+    donation_request = DonationRequest.objects.get(id=drequest_id)
+
+    # BONUS: Security
+    if donation_request.creator_user == request.user:
+        donation_request.delete()
+
+    return redirect('/request/')
