@@ -8,4 +8,4 @@ class DonationRequest(models.Model):
     description = models.TextField()
     cover_url = models.URLField(max_length=127)
     quantity = models.IntegerField(default=0)
-    # creator_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    creator_user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
