@@ -28,6 +28,15 @@ def about(request):
 
     return render(request, 'pages/about.html', context)
 
+def donate(request):
+    donation_requests = DonationRequest.objects.all()
+
+    context = {
+        'donation_requests': donation_requests,
+    }
+
+    return render(request, 'pages/donate.html', context)
+
 # def request(request):
 #     context = {
 #     }
