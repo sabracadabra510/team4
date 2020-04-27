@@ -17,15 +17,20 @@
   </p>
 </div>
 
-helo
+
 <br>
 
 <h3>Requested Donations</h3>
 {% for donation_request in donation_requests %}
     <hr />
+    {% if donation_request.cover_url %}
+  <img src="{{ donation_request.cover_url }}" alt="Book icon" />
+  {% else %}
+  <img src="https://image.flaticon.com/icons/png/256/171/171322.png" alt="Book icon" />
+  {% endif %}
     <h4>{{ donation_request.title }}</h4>
     <p><strong>Quantity:</strong> {{ donation_request.quantity }}</p>
-    <p><strong>Details:</strong> {{ donation_request.description }}</p>
+    <p><strong>Info:</strong> {{ donation_request.description }}</p>
     <p>(id #: {{ donation_request.id }})</p>
 
 <!-- This shows the creation date of the list, along with the avatar

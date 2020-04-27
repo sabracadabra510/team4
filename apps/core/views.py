@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from apps.core.models import DonationRequest
 from django import forms
-
+import requests
     
 class AddDonationRequestForm(forms.ModelForm):
     class Meta:
@@ -51,8 +51,21 @@ def donation_request_create(request):
             # logged_in_user = request.user
             # print('Current user:', logged_in_user)
             #finally solve thanks to this video: https://www.youtube.com/watch?v=zJWhizYFKP0
+                        ############################################################
+            # Bonus Challenge 4
+            title = form.cleaned_data['title']
+            response = requests.get(f'http://openlibrary.org/search.json?title={title}&limit=1')
+            data = response.json()
+            if data['num_found'] > 0:
+                cover_id = data['docs'][0]['cover_i']
+                url = f'http://covers.openlibrary.org/b/id/{cover_id}-M.jpg'
+            else:
+                url = ''
+            print('hello' + title)
+            ############################################################
             instance = form.save(commit=False)
             instance.creator_user = request.user
+            instance.cover_url = url
             instance.save()
 
             return redirect('/request/')
