@@ -56,7 +56,7 @@ Submitted on {{ donation_request.created|date:"F jS Y" }} by
 
 
   {% if request.user == donation_request.creator_user %}
-    <a href="/request-delete/{{ donation_request.id }}/" class="btn btn-outline-danger btn-sm">X</a>
+    <a href="/request-delete/{{ donation_request.id }}/" class="btn btn-outline-danger btn-sm">Delete this request</a>
   {% endif %}
 </div>
 
