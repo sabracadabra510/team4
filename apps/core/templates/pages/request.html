@@ -42,13 +42,13 @@
     {% endif %}
     <h4>{{ donation_request.title }}</h4>
     <p><strong>Quantity:</strong> {{ donation_request.quantity }}</p>
-    <p><strong>Info:</strong> {{ donation_request.description }}</p>
+    <p><strong>Info:</strong> {{ donation_request.info }}</p>
     <p>(id #: {{ donation_request.id }})</p>
 
 <!-- This shows the creation date of the list, along with the avatar
 and username of the creator -->
 <div>
-on {{ donation_request.created|date:"F jS Y" }} by
+Submitted on {{ donation_request.created|date:"F jS Y" }} by
 <a class="btn btn-link" href="/account/users/{{ donation_request.creator_user.username }}" >
     {{ donation_request.creator_user }}
     <img src="{{ donation_request.creator_user.gravatar }}" class="navbar-avatar" />

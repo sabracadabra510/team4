@@ -7,7 +7,7 @@ import requests
 class AddDonationRequestForm(forms.ModelForm):
     class Meta:
         model = DonationRequest
-        fields = ['title',  'quantity', 'description']
+        fields = ['title',  'quantity', 'info']
 
 
 
