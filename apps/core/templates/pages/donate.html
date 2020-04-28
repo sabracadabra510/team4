@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 
 {% block title %}
-    Request
+    Donate
 {% endblock title %}
 
 
@@ -16,33 +16,21 @@
     <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
   </p>
 </div>
-<h3>Request your Book</h3>
-<div class="card border rounded">
-  <div class="card-body">
-      <form method="POST">
-          {% csrf_token %}
-          {% bootstrap_form form %}
-          <button class="btn btn-lg btn-primary btn-block">Submit</button>
-      </form>
-  </div>
-</div>
+
 
 <br>
 
-<h3>Requested Donations</h3>
+<h3>Donate These Items and Make Someone Happy</h3>
 {% for donation_request in donation_requests %}
-
-
-
     <hr />
     {% if donation_request.cover_url %}
-    <img src="{{ donation_request.cover_url }}" alt="Book icon" />
-    {% else %}
-    <img src="https://image.flaticon.com/icons/png/256/171/171322.png" alt="Book icon" />
-    {% endif %}
+  <img src="{{ donation_request.cover_url }}" alt="Book icon" />
+  {% else %}
+  <img src="https://image.flaticon.com/icons/png/256/171/171322.png" alt="Book icon" />
+  {% endif %}
     <h4>{{ donation_request.title }}</h4>
     <p><strong>Quantity:</strong> {{ donation_request.quantity }}</p>
-    <p><strong>Info:</strong> {{ donation_request.info }}</p>
+    <p><strong>Info:</strong> {{ donation_request.description }}</p>
     <p>(id #: {{ donation_request.id }})</p>
 
 <!-- This shows the creation date of the list, along with the avatar
@@ -53,11 +41,6 @@ Submitted on {{ donation_request.created|date:"F jS Y" }} by
     {{ donation_request.creator_user }}
     <img src="{{ donation_request.creator_user.gravatar }}" class="navbar-avatar" />
 </a>
-
-
-  {% if request.user == donation_request.creator_user %}
-    <a href="/request-delete/{{ donation_request.id }}/" class="btn btn-outline-danger btn-sm">Delete this request</a>
-  {% endif %}
 </div>
 
 {% endfor %}
