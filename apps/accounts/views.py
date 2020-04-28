@@ -9,13 +9,21 @@ from apps.accounts.forms import UserEditForm, SignupForm
 from apps.accounts.models import User
 
 def log_in(request):
+    
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             # User has specified valid credentials, have user log-in, and then
             # redirect back home
             login(request, form.get_user())
-            return redirect('home')
+            
+            
+            next_path = request.GET.get('next')
+            if next_path:
+                return redirect(next_path)
+            else:
+                return redirect('home')
+            return redirect('/')
     else:
         form = AuthenticationForm()
 
