@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Donate
+{% endblock title %}
+
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">My Site</h1>
+  <p class="lead">This is a simple Jumbotron component from Bootstrap 4.</p>
+  <hr class="my-4">
+  <p>Edit this to include your content.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
+  </p>
+</div>
+
+
+<br>
+
+<h3>Donate These Items and Make Someone Happy</h3>
+{% for donation_request in donation_requests %}
+    <hr />
+    {% if donation_request.cover_url %}
+  <img src="{{ donation_request.cover_url }}" alt="Book icon" />
+  {% else %}
+  <img src="https://image.flaticon.com/icons/png/256/171/171322.png" alt="Book icon" />
+  {% endif %}
+
+    {{ donation_request.donated_or_not | safe}}
+        
+    <h4>{{ donation_request.title }}</h4>
+    <p><strong>Quantity:</strong> {{ donation_request.quantity }}</p>
+    <p><strong>Info:</strong> {{ donation_request.description }}</p>
+    <p>(id #: {{ donation_request.id }})</p>
+
+
+<div class="row">
+<form method="POST" action="donate_this_book">
+    {% csrf_token %}
+    {% bootstrap_form donation_form %}
+    <input type="hidden"  name="id" value="{{donation_request.id}}"> 
+    <button class="btn btn-lg btn-primary btn-block">Submit</button>
+</form>
+</div>
+
+<!-- This shows the creation date of the list, along with the avatar
+and username of the creator -->
+<div>
+Submitted on {{ donation_request.created|date:"F jS Y" }} by
+<a class="btn btn-link" href="/account/users/{{ donation_request.creator_user.username }}" >
+    {{ donation_request.creator_user }}
+    <img src="{{ donation_request.creator_user.gravatar }}" class="navbar-avatar" />
+</a>
+</div>
+
+{% endfor %}
+{% endblock content %}
+
+
