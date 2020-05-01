@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 
 {% block title %}
-    My Site - Home
+    DoWeDonate?!
 {% endblock title %}
 
 
 {% block content %}
 <div class="jumbotron">
-  <h1 class="display-4">My Site</h1>
-  <p class="lead">This is a simple Jumbotron component from Bootstrap 4.</p>
+  <h1 class="display-4">DoWeDonate?!</h1>
+  <p class="lead">Yes We do! <br> This website helps you donate books! <br> You can also request books!</p>
   <hr class="my-4">
-  <p>Edit this to include your content.</p>
+  <p>Sign up to get started</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
+    <a class="btn btn-primary btn-lg" href="{% url 'signup' %}" role="button">Sign up!</a>
   </p>
 </div>
 
-<p>More stuff. {{ example_context_variable }}.</p>
-
+<p>How it works is simple.  Just register to get started.  Then if you want to make a donation, check out the <a href="{% url 'donate' %}">Donate</a> page.
+Or, if you need a book you can fill out a form to make a <a href="{% url 'request' %}">Request</a>!</p>
 {% endblock content %}
 
 
