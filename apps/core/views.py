@@ -10,16 +10,10 @@ class AddDonationRequestForm(forms.ModelForm):
         fields = ['title',  'quantity', 'info']
 
 
-
-# Two example views. Change or delete as necessary.
 def home(request):
     logged_in_user = request.user
-    print('Current user:', logged_in_user)
-
     context = {
-        'example_context_variable': 'Change me.',
     }
-
     return render(request, 'pages/home.html', context)
 
 def about(request):
@@ -28,6 +22,7 @@ def about(request):
 
     return render(request, 'pages/about.html', context)
 
+#Donate page - the listing of requested books
 def donate(request):
     donation_requests = DonationRequest.objects.all()
 
@@ -37,22 +32,15 @@ def donate(request):
 
     return render(request, 'pages/donate.html', context)
 
-# def request(request):
-#     context = {
-#     }
-
-#     return render(request, 'pages/request.html', context)
+#Donations request page - with the form for making a book request
 @login_required
 def donation_request_create(request):
     donation_requests = DonationRequest.objects.all()
     if request.method == 'POST':
         form = AddDonationRequestForm(request.POST)
         if form.is_valid():
-            # logged_in_user = request.user
-            # print('Current user:', logged_in_user)
             #finally solve thanks to this video: https://www.youtube.com/watch?v=zJWhizYFKP0
-                        ############################################################
-            # Bonus Challenge 4
+            ############################################################
             title = form.cleaned_data['title']
             response = requests.get(f'http://openlibrary.org/search.json?title={title}&limit=1')
             data = response.json()
@@ -70,7 +58,7 @@ def donation_request_create(request):
 
             return redirect('/request/')
     else:
-        # if a GET  we'll create a blank form
+        # if a GET create a blank form
         form = AddDonationRequestForm()
     context = {
         'donation_requests': donation_requests,
@@ -78,9 +66,10 @@ def donation_request_create(request):
     }
     return render(request, 'pages/request.html', context)
 
+#the logged in user / request maker can delete the request they make
 @login_required
 def donation_request_delete(request, drequest_id):
-    # D in CRUD --- DELETE reading list from database
+    # DELETE reading list from database
     donation_request = DonationRequest.objects.get(id=drequest_id)
 
     # BONUS: Security

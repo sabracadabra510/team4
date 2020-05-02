@@ -17,7 +17,7 @@ def log_in(request):
             # redirect back home
             login(request, form.get_user())
             
-            
+            # redirect to current page
             next_path = request.GET.get('next')
             if next_path:
                 return redirect(next_path)
