@@ -8,19 +8,13 @@
 
 {% block content %}
 <div class="jumbotron">
-  <h1 class="display-4">My Site</h1>
-  <p class="lead">This is a simple Jumbotron component from Bootstrap 4.</p>
-  <hr class="my-4">
-  <p>Edit this to include your content.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
-  </p>
+  <h1 class="display-4">Donate Books</h1>
+  <p class="lead">One person's used books are another person's treasure.</p>
 </div>
-
 
 <br>
 
-<h3>Donate These Items and Make Someone Happy</h3>
+<h3>Donate a Book - Change the Story</h3>
 {% for donation_request in donation_requests %}
     <hr />
     {% if donation_request.cover_url %}
@@ -45,5 +39,3 @@ Submitted on {{ donation_request.created|date:"F jS Y" }} by
 
 {% endfor %}
 {% endblock content %}
-
-

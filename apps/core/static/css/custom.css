@@ -1,4 +1,9 @@
 /* Custom CSS goes here */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
 
 .navbar {
     background: linear-gradient(135deg, #f2f9fe 0%, #d6f0fd 100%);
@@ -12,4 +17,9 @@
     height: 30px;
     margin-top: -10px;
     margin-bottom: -10px;
+}
+
+.jumbotron {
+    background: linear-gradient(135deg, #f2f9fe 0%, #D6F0FD 100%);
+    padding: 2rem;
 }
